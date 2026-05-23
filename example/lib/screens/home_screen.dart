@@ -7,12 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../shopify_providers.dart';
+
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final authState = ref.watch(authStateProvider);
+    final customer = authState.valueOrNull;
+    final isLoggedIn = authState is AsyncData && customer != null;
 
     return Scaffold(
       appBar: AppBar(
@@ -22,10 +27,41 @@ class HomeScreen extends ConsumerWidget {
             icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () => context.push('/cart'),
           ),
-          IconButton(
-            icon: const Icon(Icons.person_outline),
-            onPressed: () => context.push('/login'),
-          ),
+          if (isLoggedIn)
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.person),
+              tooltip: customer.firstName,
+              onSelected: (v) {
+                if (v == 'logout') {
+                  ref.read(authStateProvider.notifier).logout();
+                }
+              },
+              itemBuilder: (_) => [
+                PopupMenuItem(
+                  enabled: false,
+                  child: Text(
+                    '${customer.firstName} ${customer.lastName}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                const PopupMenuDivider(),
+                const PopupMenuItem(
+                  value: 'logout',
+                  child: Row(
+                    children: [
+                      Icon(Icons.logout, size: 18),
+                      SizedBox(width: 8),
+                      Text('Logout'),
+                    ],
+                  ),
+                ),
+              ],
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.person_outline),
+              onPressed: () => context.push('/login'),
+            ),
         ],
       ),
       body: ListView(
@@ -101,10 +137,14 @@ class HomeScreen extends ConsumerWidget {
             onTap: () => context.push('/cart'),
           ),
           _NavTile(
-            icon: Icons.person_outline,
-            label: 'Account',
-            subtitle: 'Login or create account',
-            onTap: () => context.push('/login'),
+            icon: isLoggedIn ? Icons.person : Icons.person_outline,
+            label: isLoggedIn
+                ? '${customer.firstName} ${customer.lastName}'
+                : 'Account',
+            subtitle: isLoggedIn ? customer.email : 'Login or create account',
+            onTap: isLoggedIn
+                ? () => ref.read(authStateProvider.notifier).logout()
+                : () => context.push('/login'),
           ),
 
           const SizedBox(height: 32),

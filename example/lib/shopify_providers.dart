@@ -35,6 +35,55 @@ final customerProvider = Provider<CustomerService>(
   (ref) => ref.watch(shopifyClientProvider).customer,
 );
 
+// ── Auth state ─────────────────────────────────────────────────────────────
+
+final authStateProvider =
+    StateNotifierProvider<AuthNotifier, AsyncValue<Customer?>>(
+  (ref) => AuthNotifier(ref.watch(authProvider))..init(),
+);
+
+class AuthNotifier extends StateNotifier<AsyncValue<Customer?>> {
+  AuthNotifier(this._auth) : super(const AsyncValue.loading());
+
+  final AuthService _auth;
+  String? _token;
+
+  Future<void> init() async {
+    try {
+      final customer = await _auth.restoreSession();
+      if (!mounted) return;
+      state = AsyncValue.data(customer);
+    } catch (_) {
+      if (mounted) state = const AsyncValue.data(null);
+    }
+  }
+
+  Future<void> login({
+    required String email,
+    required String password,
+  }) async {
+    final token = await _auth.login(email: email, password: password);
+    _token = token.accessToken;
+    try {
+      final customer = await _auth.currentCustomer(token.accessToken);
+      if (mounted) state = AsyncValue.data(customer);
+    } catch (_) {
+      if (mounted) state = const AsyncValue.data(null);
+    }
+  }
+
+  Future<void> logout() async {
+    final t = _token;
+    _token = null;
+    if (t != null) {
+      try {
+        await _auth.logout(t);
+      } catch (_) {}
+    }
+    if (mounted) state = const AsyncValue.data(null);
+  }
+}
+
 // ── Cart state ─────────────────────────────────────────────────────────────
 
 final cartStateProvider =
