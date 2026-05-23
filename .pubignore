@@ -1,0 +1,9 @@
+# Build artifacts — not needed for pub.dev consumers
+build/
+.dart_tool/
+.idea/
+.vscode/
+*.iml
+
+# Coverage reports
+coverage/

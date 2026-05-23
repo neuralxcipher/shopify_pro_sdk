@@ -25,9 +25,7 @@ final class AuthRepositoryImpl implements AuthRepository {
     required this.config,
     FlutterSecureStorage? secureStorage,
   }) : _storage = secureStorage ??
-            const FlutterSecureStorage(
-              aOptions: AndroidOptions(encryptedSharedPreferences: true),
-            );
+            const FlutterSecureStorage();
 
   final GraphQLEngine engine;
   final ShopifyConfig config;

@@ -4,7 +4,7 @@
 library;
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:http/http.dart' as http;
 import 'package:shopify_pro_sdk/src/core/cache/cache_manager.dart';
 import 'package:shopify_pro_sdk/src/core/cache/cache_policy.dart';
 import 'package:shopify_pro_sdk/src/core/errors/shopify_exception.dart';
@@ -14,8 +14,20 @@ import 'package:shopify_pro_sdk/src/core/network/retry_handler.dart';
 
 import '../mocks/mock_http_client.dart';
 
+class _FakeHttpClient extends http.BaseClient {
+  http.Response nextResponse = http.Response('{}', 200);
+
+  @override
+  Future<http.StreamedResponse> send(http.BaseRequest request) async =>
+      http.StreamedResponse(
+        Stream.value(nextResponse.bodyBytes),
+        nextResponse.statusCode,
+        headers: nextResponse.headers,
+      );
+}
+
 void main() {
-  late MockHttpClient mockHttp;
+  late _FakeHttpClient fakeHttp;
   late ShopifyCacheManager cache;
   late GraphQLEngine engine;
 
@@ -23,7 +35,7 @@ void main() {
   const testHeaders = {'X-Shopify-Storefront-Access-Token': 'test_token'};
 
   setUp(() async {
-    mockHttp = MockHttpClient();
+    fakeHttp = _FakeHttpClient();
     cache = ShopifyCacheManager();
     engine = GraphQLEngine(
       endpoint: testEndpoint,
@@ -31,22 +43,14 @@ void main() {
       cacheManager: cache,
       defaultCachePolicy: CachePolicy.networkOnly,
       retryConfig: const RetryConfig(maxAttempts: 1),
-      httpClient: mockHttp,
+      httpClient: fakeHttp,
     );
   });
 
   group('GraphQLEngine.query', () {
     test('returns data on successful 200 response', () async {
-      when(
-        mockHttp.post(
-          Uri.parse(testEndpoint),
-          headers: anyNamed('headers'),
-          body: anyNamed('body'),
-        ),
-      ).thenAnswer(
-        (_) async => fakeJsonResponse(
-          gqlData({'product': <String, dynamic>{'id': 'gid://shopify/Product/1', 'title': 'Test'}}),
-        ),
+      fakeHttp.nextResponse = fakeJsonResponse(
+        gqlData({'product': <String, dynamic>{'id': 'gid://shopify/Product/1', 'title': 'Test'}}),
       );
 
       final result = await engine.query(
@@ -58,20 +62,10 @@ void main() {
     });
 
     test('throws ShopifyGraphQLException on GraphQL errors', () async {
-      when(
-        mockHttp.post(
-          Uri.parse(testEndpoint),
-          headers: anyNamed('headers'),
-          body: anyNamed('body'),
-        ),
-      ).thenAnswer(
-        (_) async => fakeJsonResponse(
-          gqlErrors(['Product not found']),
-        ),
-      );
+      fakeHttp.nextResponse = fakeJsonResponse(gqlErrors(['Product not found']));
 
-      expect(
-        () => engine.query(
+      await expectLater(
+        engine.query(
           GraphQLRequestBuilder().query('{ product(id: "bad") { id } }').build(),
         ),
         throwsA(isA<ShopifyGraphQLException>()),
@@ -79,16 +73,10 @@ void main() {
     });
 
     test('throws ShopifyAuthException on 401', () async {
-      when(
-        mockHttp.post(
-          Uri.parse(testEndpoint),
-          headers: anyNamed('headers'),
-          body: anyNamed('body'),
-        ),
-      ).thenAnswer((_) async => fakeJsonResponse({}, statusCode: 401));
+      fakeHttp.nextResponse = fakeJsonResponse({}, statusCode: 401);
 
-      expect(
-        () => engine.query(
+      await expectLater(
+        engine.query(
           GraphQLRequestBuilder().query('{ shop { name } }').build(),
         ),
         throwsA(isA<ShopifyAuthException>()),
@@ -96,16 +84,10 @@ void main() {
     });
 
     test('throws ShopifyRateLimitException on 429', () async {
-      when(
-        mockHttp.post(
-          Uri.parse(testEndpoint),
-          headers: anyNamed('headers'),
-          body: anyNamed('body'),
-        ),
-      ).thenAnswer((_) async => fakeJsonResponse({}, statusCode: 429));
+      fakeHttp.nextResponse = fakeJsonResponse({}, statusCode: 429);
 
-      expect(
-        () => engine.query(
+      await expectLater(
+        engine.query(
           GraphQLRequestBuilder().query('{ shop { name } }').build(),
         ),
         throwsA(isA<ShopifyRateLimitException>()),

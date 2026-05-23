@@ -2,7 +2,7 @@
 ///
 /// Developed and maintained by Abrar Ali — NEURALXCIPHER (PRIVATE) LIMITED
 /// https://neuralxcipher.com
-library shopify_pro_sdk;
+library;
 
 // Cache
 export 'src/core/cache/cache_manager.dart';
