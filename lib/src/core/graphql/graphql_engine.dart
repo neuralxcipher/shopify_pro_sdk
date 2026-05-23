@@ -70,11 +70,15 @@ class GraphQLEngine {
         cachePolicy == CachePolicy.cacheAndNetwork ||
         cachePolicy == CachePolicy.cacheOnly) {
       final cached = await cacheManager.get(
-          cacheKey, cacheTtl ?? CacheTtl.defaultProducts);
+        cacheKey,
+        cacheTtl ?? CacheTtl.defaultProducts,
+      );
       if (cached != null) {
         if (cachePolicy == CachePolicy.cacheAndNetwork) {
           _fetchAndCache(
-              request, cacheKey); // fire-and-forget background refresh
+            request,
+            cacheKey,
+          ); // fire-and-forget background refresh
         }
         return cached;
       }
@@ -94,8 +98,10 @@ class GraphQLEngine {
     String cacheKey,
     CachePolicy cachePolicy,
   ) async {
-    _log.debug('→ GraphQL request: ${request.operationName ?? "anonymous"}',
-        request.variables);
+    _log.debug(
+      '→ GraphQL request: ${request.operationName ?? "anonymous"}',
+      request.variables,
+    );
 
     late http.Response response;
     try {
@@ -115,7 +121,8 @@ class GraphQLEngine {
     }
 
     _log.debug(
-        '← HTTP ${response.statusCode} for ${request.operationName ?? "anonymous"}');
+      '← HTTP ${response.statusCode} for ${request.operationName ?? "anonymous"}',
+    );
 
     if (response.statusCode == 429) {
       final retryAfter = int.tryParse(
@@ -154,7 +161,8 @@ class GraphQLEngine {
     final data = json['data'] as Map<String, dynamic>?;
     if (data == null) {
       throw const ShopifyDeserializationException(
-          'Response has no "data" field');
+        'Response has no "data" field',
+      );
     }
 
     if (cachePolicy != CachePolicy.networkOnly) {

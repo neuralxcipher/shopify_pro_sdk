@@ -69,7 +69,8 @@ final class GraphQLError {
         extensions: json['extensions'] as Map<String, dynamic>?,
         locations: (json['locations'] as List<dynamic>?)
             ?.map(
-                (e) => GraphQLErrorLocation.fromJson(e as Map<String, dynamic>))
+              (e) => GraphQLErrorLocation.fromJson(e as Map<String, dynamic>),
+            )
             .toList(),
         path: (json['path'] as List<dynamic>?)?.cast<String>(),
       );

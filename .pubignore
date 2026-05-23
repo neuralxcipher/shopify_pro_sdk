@@ -7,3 +7,8 @@ build/
 
 # Coverage reports
 coverage/
+
+# Example app generated files
+example/.dart_tool/
+example/.flutter-plugins-dependencies
+example/.flutter-plugins

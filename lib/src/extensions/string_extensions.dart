@@ -19,9 +19,11 @@ extension ShopifyStringX on String {
 
   /// Converts `snake_case` or `UPPER_CASE` to `Title Case`.
   String toTitleCase() => split(RegExp(r'[_\s]+'))
-      .map((w) => w.isEmpty
-          ? ''
-          : '${w[0].toUpperCase()}${w.substring(1).toLowerCase()}')
+      .map(
+        (w) => w.isEmpty
+            ? ''
+            : '${w[0].toUpperCase()}${w.substring(1).toLowerCase()}',
+      )
       .join(' ');
 
   /// Truncates the string to [maxLength] and appends [suffix] if truncated.

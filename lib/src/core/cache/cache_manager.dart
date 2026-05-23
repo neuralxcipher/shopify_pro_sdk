@@ -32,8 +32,10 @@ final class _CacheEntry {
 /// Tier 1: `LinkedHashMap`-based in-memory LRU with a configurable max size.
 /// Tier 2: [SharedPreferences]-backed disk persistence for app restarts.
 class ShopifyCacheManager {
-  ShopifyCacheManager(
-      {this.maxMemoryEntries = 128, this.diskKeyPrefix = 'spro_'});
+  ShopifyCacheManager({
+    this.maxMemoryEntries = 128,
+    this.diskKeyPrefix = 'spro_',
+  });
 
   final int maxMemoryEntries;
   final String diskKeyPrefix;

@@ -175,7 +175,8 @@ final class CustomerRepositoryImpl implements CustomerRepository {
         .whereType<Map<String, dynamic>>()
         .map((e) => e['message'] as String? ?? 'Unknown error')
         .join('; ');
-    if (messages.isNotEmpty)
+    if (messages.isNotEmpty) {
       throw ShopifyGraphQLException(messages, errors: []);
+    }
   }
 }

@@ -86,7 +86,7 @@ final class ProductVariant {
         'title': title,
         'price': {
           'amount': price.toStringAsFixed(2),
-          'currencyCode': currencyCode
+          'currencyCode': currencyCode,
         },
         if (compareAtPrice != null)
           'compareAtPrice': {

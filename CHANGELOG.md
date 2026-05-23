@@ -7,6 +7,15 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [1.0.2] — 2026-05-24
+
+### Fixed
+
+- Removed invalid `COLLECTION` from `search` query `types` argument (`SearchType!` only accepts `PRODUCT`, `ARTICLE`, `PAGE`).
+- Removed `... on Collection` inline fragment from `search` query (not part of `SearchResultItem` union).
+
+---
+
 ## [1.0.1] — 2026-05-24
 
 ### Fixed
@@ -19,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [1.0.0] — 2026-05-23
 
 ### Added
+
 - Initial enterprise-grade release by Abrar Ali — NEURALXCIPHER (PRIVATE) LIMITED
 - Custom lightweight GraphQL engine built on `http` (no heavy dependency chain)
 - Two-tier cache: in-memory LRU + SharedPreferences persistence
@@ -52,6 +62,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ## [Unreleased]
 
 ### Planned
+
 - Shopify Payments direct integration
 - Storefront API subscriptions via WebSocket
 - Analytics event tracking (pixel)

@@ -213,8 +213,10 @@ final class CartRepositoryImpl implements CartRepository {
     _throwIfUserErrors(result['userErrors']);
     final cartJson = result['cart'] as Map<String, dynamic>?;
     if (cartJson == null) {
-      throw const ShopifyGraphQLException('Cart mutation returned no cart',
-          errors: []);
+      throw const ShopifyGraphQLException(
+        'Cart mutation returned no cart',
+        errors: [],
+      );
     }
     return Cart.fromJson(cartJson);
   }

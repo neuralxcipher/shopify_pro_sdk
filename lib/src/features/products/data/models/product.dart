@@ -81,7 +81,8 @@ final class Product {
           : null,
       priceRange: json['priceRange'] != null
           ? ProductPriceRange.fromJson(
-              json['priceRange'] as Map<String, dynamic>)
+              json['priceRange'] as Map<String, dynamic>,
+            )
           : null,
       compareAtPriceRange: json['compareAtPriceRange'] != null
           ? ProductPriceRange.fromJson(
@@ -162,10 +163,10 @@ final class Product {
         'tags': tags,
         'availableForSale': availableForSale,
         'variants': {
-          'edges': variants.map((v) => {'node': v.toJson()}).toList()
+          'edges': variants.map((v) => {'node': v.toJson()}).toList(),
         },
         'images': {
-          'edges': images.map((i) => {'node': i.toJson()}).toList()
+          'edges': images.map((i) => {'node': i.toJson()}).toList(),
         },
         'options': options.map((o) => o.toJson()).toList(),
         if (featuredImage != null) 'featuredImage': featuredImage!.toJson(),

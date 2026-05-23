@@ -80,7 +80,7 @@ final class Cart {
         if (note != null) 'note': note,
         'cost': cost.toJson(),
         'lines': {
-          'edges': lines.map((l) => {'node': l.toJson()}).toList()
+          'edges': lines.map((l) => {'node': l.toJson()}).toList(),
         },
       };
 }

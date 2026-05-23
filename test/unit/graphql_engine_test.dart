@@ -54,8 +54,8 @@ void main() {
         gqlData({
           'product': <String, dynamic>{
             'id': 'gid://shopify/Product/1',
-            'title': 'Test'
-          }
+            'title': 'Test',
+          },
         }),
       );
 
@@ -67,7 +67,9 @@ void main() {
 
       expect(result['product'], isA<Map<String, dynamic>>());
       expect(
-          (result['product'] as Map<String, dynamic>)['title'], equals('Test'));
+        (result['product'] as Map<String, dynamic>)['title'],
+        equals('Test'),
+      );
     });
 
     test('throws ShopifyGraphQLException on GraphQL errors', () async {

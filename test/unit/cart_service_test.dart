@@ -39,8 +39,11 @@ class _FakeCartRepo implements CartRepository {
       nextCart!;
 
   @override
-  Future<Cart> getCart(String cartId,
-          {String? country, String? language}) async =>
+  Future<Cart> getCart(
+    String cartId, {
+    String? country,
+    String? language,
+  }) async =>
       nextCart!;
 
   @override

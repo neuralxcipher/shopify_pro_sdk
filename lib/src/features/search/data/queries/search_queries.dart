@@ -20,7 +20,7 @@ abstract final class SearchQueries {
         after: $after
         sortKey: $sortKey
         reverse: $reverse
-        types: [PRODUCT, COLLECTION]
+        types: [PRODUCT]
       ) {
         totalCount
         pageInfo { hasNextPage endCursor }
@@ -44,10 +44,6 @@ abstract final class SearchQueries {
                   }
                 }
               }
-            }
-            ... on Collection {
-              id title handle description
-              image { id url altText }
             }
           }
         }
