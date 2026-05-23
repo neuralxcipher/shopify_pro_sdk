@@ -23,9 +23,10 @@ final class Cart {
 
   factory Cart.fromJson(Map<String, dynamic> json) {
     final linesEdges =
-        (json['lines'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ?? [];
-    final discountRaw =
-        (json['discountCodes'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+        (json['lines'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ??
+            [];
+    final discountRaw = (json['discountCodes'] as List<dynamic>? ?? [])
+        .cast<Map<String, dynamic>>();
 
     return Cart(
       id: json['id'] as String,
@@ -42,9 +43,8 @@ final class Cart {
       cost: CartCost.fromJson(
         json['cost'] as Map<String, dynamic>? ?? {},
       ),
-      discountCodes: discountRaw
-          .map((d) => CartDiscountCode.fromJson(d))
-          .toList(),
+      discountCodes:
+          discountRaw.map((d) => CartDiscountCode.fromJson(d)).toList(),
       attributes: (json['attributes'] as List<dynamic>? ?? [])
           .map(
             (a) => CartLineAttribute.fromJson(a as Map<String, dynamic>),
@@ -79,7 +79,9 @@ final class Cart {
         'totalQuantity': totalQuantity,
         if (note != null) 'note': note,
         'cost': cost.toJson(),
-        'lines': {'edges': lines.map((l) => {'node': l.toJson()}).toList()},
+        'lines': {
+          'edges': lines.map((l) => {'node': l.toJson()}).toList()
+        },
       };
 }
 

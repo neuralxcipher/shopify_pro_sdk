@@ -27,12 +27,14 @@ class CartScreen extends ConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.shopping_cart_outlined, size: 64, color: Colors.grey),
+                  const Icon(Icons.shopping_cart_outlined,
+                      size: 64, color: Colors.grey),
                   const SizedBox(height: 16),
                   const Text('Your cart is empty'),
                   const SizedBox(height: 16),
                   FilledButton(
-                    onPressed: () => ref.read(cartStateProvider.notifier).createCart(),
+                    onPressed: () =>
+                        ref.read(cartStateProvider.notifier).createCart(),
                     child: const Text('Start Shopping'),
                   ),
                 ],
@@ -74,7 +76,8 @@ class CartScreen extends ConsumerWidget {
                               onPressed: line.quantity > 1
                                   ? () => ref
                                       .read(cartStateProvider.notifier)
-                                      .updateQuantity(line.id, line.quantity - 1)
+                                      .updateQuantity(
+                                          line.id, line.quantity - 1)
                                   : null,
                             ),
                             Text('${line.quantity}'),

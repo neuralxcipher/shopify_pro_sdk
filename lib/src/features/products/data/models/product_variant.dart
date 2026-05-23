@@ -41,8 +41,7 @@ final class ProductVariant {
       compareAtPrice: compareAtPriceV2 != null
           ? double.tryParse(compareAtPriceV2['amount']?.toString() ?? '')
           : null,
-      compareAtCurrencyCode:
-          compareAtPriceV2?['currencyCode'] as String?,
+      compareAtCurrencyCode: compareAtPriceV2?['currencyCode'] as String?,
       availableForSale: json['availableForSale'] as bool? ?? true,
       sku: json['sku'] as String?,
       barcode: json['barcode'] as String?,
@@ -77,17 +76,18 @@ final class ProductVariant {
   final bool requiresShipping;
   final bool taxable;
 
-  bool get isOnSale =>
-      compareAtPrice != null && compareAtPrice! > price;
+  bool get isOnSale => compareAtPrice != null && compareAtPrice! > price;
 
-  double? get discountPercentage => isOnSale
-      ? ((compareAtPrice! - price) / compareAtPrice! * 100)
-      : null;
+  double? get discountPercentage =>
+      isOnSale ? ((compareAtPrice! - price) / compareAtPrice! * 100) : null;
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
-        'price': {'amount': price.toStringAsFixed(2), 'currencyCode': currencyCode},
+        'price': {
+          'amount': price.toStringAsFixed(2),
+          'currencyCode': currencyCode
+        },
         if (compareAtPrice != null)
           'compareAtPrice': {
             'amount': compareAtPrice!.toStringAsFixed(2),
@@ -135,7 +135,9 @@ final class ProductVariant {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ProductVariant && runtimeType == other.runtimeType && id == other.id;
+      other is ProductVariant &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;

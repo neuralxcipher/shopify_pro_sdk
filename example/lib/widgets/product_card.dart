@@ -45,7 +45,8 @@ class ProductCard extends StatelessWidget {
                     const ColoredBox(
                       color: Color(0xFFE5E5E5),
                       child: Center(
-                        child: Icon(Icons.image_not_supported, color: Colors.grey),
+                        child:
+                            Icon(Icons.image_not_supported, color: Colors.grey),
                       ),
                     ),
 

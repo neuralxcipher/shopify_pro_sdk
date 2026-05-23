@@ -31,7 +31,8 @@ void main() {
   late ShopifyCacheManager cache;
   late GraphQLEngine engine;
 
-  const testEndpoint = 'https://test-store.myshopify.com/api/2025-01/graphql.json';
+  const testEndpoint =
+      'https://test-store.myshopify.com/api/2025-01/graphql.json';
   const testHeaders = {'X-Shopify-Storefront-Access-Token': 'test_token'};
 
   setUp(() async {
@@ -50,23 +51,34 @@ void main() {
   group('GraphQLEngine.query', () {
     test('returns data on successful 200 response', () async {
       fakeHttp.nextResponse = fakeJsonResponse(
-        gqlData({'product': <String, dynamic>{'id': 'gid://shopify/Product/1', 'title': 'Test'}}),
+        gqlData({
+          'product': <String, dynamic>{
+            'id': 'gid://shopify/Product/1',
+            'title': 'Test'
+          }
+        }),
       );
 
       final result = await engine.query(
-        GraphQLRequestBuilder().query('{ product(id: "1") { id title } }').build(),
+        GraphQLRequestBuilder()
+            .query('{ product(id: "1") { id title } }')
+            .build(),
       );
 
       expect(result['product'], isA<Map<String, dynamic>>());
-      expect((result['product'] as Map<String, dynamic>)['title'], equals('Test'));
+      expect(
+          (result['product'] as Map<String, dynamic>)['title'], equals('Test'));
     });
 
     test('throws ShopifyGraphQLException on GraphQL errors', () async {
-      fakeHttp.nextResponse = fakeJsonResponse(gqlErrors(['Product not found']));
+      fakeHttp.nextResponse =
+          fakeJsonResponse(gqlErrors(['Product not found']));
 
       await expectLater(
         engine.query(
-          GraphQLRequestBuilder().query('{ product(id: "bad") { id } }').build(),
+          GraphQLRequestBuilder()
+              .query('{ product(id: "bad") { id } }')
+              .build(),
         ),
         throwsA(isA<ShopifyGraphQLException>()),
       );

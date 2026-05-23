@@ -82,8 +82,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               )
             : GridView.builder(
                 padding: const EdgeInsets.all(12),
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.7,
                   crossAxisSpacing: 12,

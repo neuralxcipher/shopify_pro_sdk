@@ -20,19 +20,18 @@ final class CustomerOrder {
 
   factory CustomerOrder.fromJson(Map<String, dynamic> json) {
     final totalRaw = json['totalPriceV2'] as Map<String, dynamic>? ?? {};
-    final lineEdges =
-        (json['lineItems'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ?? [];
+    final lineEdges = (json['lineItems'] as Map<String, dynamic>?)?['edges']
+            as List<dynamic>? ??
+        [];
 
     return CustomerOrder(
       id: json['id'] as String,
       name: json['name'] as String? ?? '',
       orderNumber: json['orderNumber'] as int? ?? 0,
-      totalPrice:
-          double.tryParse(totalRaw['amount']?.toString() ?? '0') ?? 0,
+      totalPrice: double.tryParse(totalRaw['amount']?.toString() ?? '0') ?? 0,
       currencyCode: totalRaw['currencyCode'] as String? ?? 'USD',
-      processedAt:
-          DateTime.tryParse(json['processedAt'] as String? ?? '') ??
-              DateTime.now(),
+      processedAt: DateTime.tryParse(json['processedAt'] as String? ?? '') ??
+          DateTime.now(),
       financialStatus: json['financialStatus'] as String? ?? '',
       fulfillmentStatus: json['fulfillmentStatus'] as String? ?? '',
       statusUrl: json['statusUrl'] as String?,
@@ -87,8 +86,7 @@ final class OrderLineItem {
   });
 
   factory OrderLineItem.fromJson(Map<String, dynamic> json) {
-    final priceRaw =
-        json['currentTotalPrice'] as Map<String, dynamic>? ?? {};
+    final priceRaw = json['currentTotalPrice'] as Map<String, dynamic>? ?? {};
     return OrderLineItem(
       title: json['title'] as String? ?? '',
       quantity: json['quantity'] as int? ?? 1,
@@ -98,7 +96,7 @@ final class OrderLineItem {
       variantTitle:
           (json['variant'] as Map<String, dynamic>?)?['title'] as String?,
       imageUrl: ((json['variant'] as Map<String, dynamic>?)?['image']
-              as Map<String, dynamic>?)?['url'] as String?,
+          as Map<String, dynamic>?)?['url'] as String?,
     );
   }
 

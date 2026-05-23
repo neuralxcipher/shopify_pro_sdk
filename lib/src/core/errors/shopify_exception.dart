@@ -68,7 +68,8 @@ final class GraphQLError {
         message: json['message'] as String? ?? 'Unknown GraphQL error',
         extensions: json['extensions'] as Map<String, dynamic>?,
         locations: (json['locations'] as List<dynamic>?)
-            ?.map((e) => GraphQLErrorLocation.fromJson(e as Map<String, dynamic>))
+            ?.map(
+                (e) => GraphQLErrorLocation.fromJson(e as Map<String, dynamic>))
             .toList(),
         path: (json['path'] as List<dynamic>?)?.cast<String>(),
       );
@@ -84,7 +85,8 @@ final class GraphQLError {
       code == 'THROTTLED' || message.toLowerCase().contains('throttled');
 
   @override
-  String toString() => 'GraphQLError: $message${code != null ? " [$code]" : ""}';
+  String toString() =>
+      'GraphQLError: $message${code != null ? " [$code]" : ""}';
 }
 
 /// Line/column reference within a GraphQL document.

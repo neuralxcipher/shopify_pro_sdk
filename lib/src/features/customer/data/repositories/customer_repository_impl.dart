@@ -117,7 +117,8 @@ final class CustomerRepositoryImpl implements CustomerRepository {
           .build(),
     );
     _throwIfErrors(
-      (data['customerAddressDelete'] as Map<String, dynamic>?)?['customerUserErrors'],
+      (data['customerAddressDelete']
+          as Map<String, dynamic>?)?['customerUserErrors'],
     );
   }
 
@@ -135,7 +136,8 @@ final class CustomerRepositoryImpl implements CustomerRepository {
           .build(),
     );
     _throwIfErrors(
-      (data['customerDefaultAddressUpdate'] as Map<String, dynamic>?)?['customerUserErrors'],
+      (data['customerDefaultAddressUpdate']
+          as Map<String, dynamic>?)?['customerUserErrors'],
     );
   }
 
@@ -173,6 +175,7 @@ final class CustomerRepositoryImpl implements CustomerRepository {
         .whereType<Map<String, dynamic>>()
         .map((e) => e['message'] as String? ?? 'Unknown error')
         .join('; ');
-    if (messages.isNotEmpty) throw ShopifyGraphQLException(messages, errors: []);
+    if (messages.isNotEmpty)
+      throw ShopifyGraphQLException(messages, errors: []);
   }
 }

@@ -19,8 +19,7 @@ final class ShopifyPage<T> {
   ) {
     final edges = (connection['edges'] as List<dynamic>? ?? [])
         .cast<Map<String, dynamic>>();
-    final pageInfo =
-        connection['pageInfo'] as Map<String, dynamic>? ?? {};
+    final pageInfo = connection['pageInfo'] as Map<String, dynamic>? ?? {};
 
     final items = edges.map((edge) {
       final node = edge['node'] as Map<String, dynamic>;

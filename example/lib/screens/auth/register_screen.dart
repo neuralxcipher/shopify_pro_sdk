@@ -77,7 +77,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 32),
-
                 Row(
                   children: [
                     Expanded(
@@ -106,7 +105,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-
                 TextFormField(
                   controller: _emailCtrl,
                   decoration: const InputDecoration(
@@ -115,11 +113,11 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     border: OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (v) =>
-                      v != null && v.contains('@') ? null : 'Enter a valid email',
+                  validator: (v) => v != null && v.contains('@')
+                      ? null
+                      : 'Enter a valid email',
                 ),
                 const SizedBox(height: 16),
-
                 TextFormField(
                   controller: _passwordCtrl,
                   obscureText: _obscurePassword,
@@ -129,7 +127,9 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        _obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                       ),
                       onPressed: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
@@ -139,14 +139,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       v != null && v.length >= 6 ? null : 'Min 6 characters',
                 ),
                 const SizedBox(height: 8),
-
                 CheckboxListTile(
                   contentPadding: EdgeInsets.zero,
                   title: const Text('Receive marketing emails'),
                   value: _acceptsMarketing,
-                  onChanged: (v) => setState(() => _acceptsMarketing = v ?? false),
+                  onChanged: (v) =>
+                      setState(() => _acceptsMarketing = v ?? false),
                 ),
-
                 if (_error != null)
                   Text(
                     _error!,
@@ -154,7 +153,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       color: Theme.of(context).colorScheme.error,
                     ),
                   ),
-
                 const SizedBox(height: 16),
                 FilledButton(
                   onPressed: _loading ? null : _register,

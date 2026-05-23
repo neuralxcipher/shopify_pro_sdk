@@ -37,7 +37,8 @@ class CollectionsScreen extends ConsumerWidget {
               clipBehavior: Clip.antiAlias,
               margin: const EdgeInsets.only(bottom: 12),
               child: InkWell(
-                onTap: () => context.push('/products?collection=${collection.handle}'),
+                onTap: () =>
+                    context.push('/products?collection=${collection.handle}'),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

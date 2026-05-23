@@ -7,7 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shopify_pro_sdk/shopify_pro_sdk.dart';
 
 final shopifyClientProvider = Provider<ShopifyClient>(
-  (_) => throw UnimplementedError('Override shopifyClientProvider in ProviderScope'),
+  (_) => throw UnimplementedError(
+      'Override shopifyClientProvider in ProviderScope'),
 );
 
 final productsProvider = Provider<ProductService>(
@@ -36,7 +37,8 @@ final customerProvider = Provider<CustomerService>(
 
 // ── Cart state ─────────────────────────────────────────────────────────────
 
-final cartStateProvider = StateNotifierProvider<CartNotifier, AsyncValue<Cart?>>(
+final cartStateProvider =
+    StateNotifierProvider<CartNotifier, AsyncValue<Cart?>>(
   CartNotifier.new,
 );
 
@@ -74,7 +76,8 @@ class CartNotifier extends StateNotifier<AsyncValue<Cart?>> {
     if (current == null) return;
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(
-      () => _cart.updateQuantity(current.id, lineId: lineId, quantity: quantity),
+      () =>
+          _cart.updateQuantity(current.id, lineId: lineId, quantity: quantity),
     );
   }
 }

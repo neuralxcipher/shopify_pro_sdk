@@ -32,10 +32,9 @@ final class Checkout {
       ),
       totalPrice: parseAmount(json['totalPriceV2'] as Map<String, dynamic>?),
       totalTax: parseAmount(json['totalTaxV2'] as Map<String, dynamic>?),
-      currencyCode:
-          (json['subtotalPriceV2'] as Map<String, dynamic>?)?['currencyCode']
-              as String? ??
-              'USD',
+      currencyCode: (json['subtotalPriceV2']
+              as Map<String, dynamic>?)?['currencyCode'] as String? ??
+          'USD',
       ready: json['ready'] as bool? ?? false,
       completedAt: json['completedAt'] != null
           ? DateTime.tryParse(json['completedAt'] as String)

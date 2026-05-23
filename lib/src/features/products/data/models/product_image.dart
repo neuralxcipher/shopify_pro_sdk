@@ -53,7 +53,9 @@ final class ProductImage {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ProductImage && runtimeType == other.runtimeType && id == other.id;
+      other is ProductImage &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;

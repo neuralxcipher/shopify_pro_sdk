@@ -39,7 +39,9 @@ class _FakeCartRepo implements CartRepository {
       nextCart!;
 
   @override
-  Future<Cart> getCart(String cartId, {String? country, String? language}) async => nextCart!;
+  Future<Cart> getCart(String cartId,
+          {String? country, String? language}) async =>
+      nextCart!;
 
   @override
   Future<Cart> addLines(
@@ -109,7 +111,8 @@ void main() {
       expect(cart.id, equals('gid://shopify/Cart/abc123'));
     });
 
-    test('addItem builds CartLineInput with correct variant and quantity', () async {
+    test('addItem builds CartLineInput with correct variant and quantity',
+        () async {
       fakeRepo.nextCart = _fakeCart();
 
       await service.addItem(

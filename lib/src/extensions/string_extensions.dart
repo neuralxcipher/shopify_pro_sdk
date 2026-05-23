@@ -14,11 +14,14 @@ extension ShopifyStringX on String {
   bool get isShopifyGid => startsWith('gid://shopify/');
 
   /// Capitalises the first letter of the string.
-  String capitalised() => isEmpty ? this : '${this[0].toUpperCase()}${substring(1)}';
+  String capitalised() =>
+      isEmpty ? this : '${this[0].toUpperCase()}${substring(1)}';
 
   /// Converts `snake_case` or `UPPER_CASE` to `Title Case`.
   String toTitleCase() => split(RegExp(r'[_\s]+'))
-      .map((w) => w.isEmpty ? '' : '${w[0].toUpperCase()}${w.substring(1).toLowerCase()}')
+      .map((w) => w.isEmpty
+          ? ''
+          : '${w[0].toUpperCase()}${w.substring(1).toLowerCase()}')
       .join(' ');
 
   /// Truncates the string to [maxLength] and appends [suffix] if truncated.

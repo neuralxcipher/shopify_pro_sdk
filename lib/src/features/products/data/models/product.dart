@@ -37,19 +37,20 @@ final class Product {
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    final variantsEdges =
-        (json['variants'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ?? [];
+    final variantsEdges = (json['variants'] as Map<String, dynamic>?)?['edges']
+            as List<dynamic>? ??
+        [];
     final imagesEdges =
-        (json['images'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ?? [];
+        (json['images'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ??
+            [];
     final optionsRaw =
         (json['options'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
     final metafieldsRaw = (json['metafields'] as List<dynamic>? ?? [])
         .whereType<Map<String, dynamic>>()
         .toList();
-    final sellingPlanGroupsEdges =
-        (json['sellingPlanGroups'] as Map<String, dynamic>?)?['edges']
-            as List<dynamic>? ??
-            [];
+    final sellingPlanGroupsEdges = (json['sellingPlanGroups']
+            as Map<String, dynamic>?)?['edges'] as List<dynamic>? ??
+        [];
 
     return Product(
       id: json['id'] as String,
@@ -79,7 +80,8 @@ final class Product {
           ? ProductSeo.fromJson(json['seo'] as Map<String, dynamic>)
           : null,
       priceRange: json['priceRange'] != null
-          ? ProductPriceRange.fromJson(json['priceRange'] as Map<String, dynamic>)
+          ? ProductPriceRange.fromJson(
+              json['priceRange'] as Map<String, dynamic>)
           : null,
       compareAtPriceRange: json['compareAtPriceRange'] != null
           ? ProductPriceRange.fromJson(
@@ -159,8 +161,12 @@ final class Product {
         'vendor': vendor,
         'tags': tags,
         'availableForSale': availableForSale,
-        'variants': {'edges': variants.map((v) => {'node': v.toJson()}).toList()},
-        'images': {'edges': images.map((i) => {'node': i.toJson()}).toList()},
+        'variants': {
+          'edges': variants.map((v) => {'node': v.toJson()}).toList()
+        },
+        'images': {
+          'edges': images.map((i) => {'node': i.toJson()}).toList()
+        },
         'options': options.map((o) => o.toJson()).toList(),
         if (featuredImage != null) 'featuredImage': featuredImage!.toJson(),
         if (seo != null) 'seo': seo!.toJson(),
@@ -211,10 +217,8 @@ final class ProductPriceRange {
     final min = json['minVariantPrice'] as Map<String, dynamic>? ?? {};
     final max = json['maxVariantPrice'] as Map<String, dynamic>? ?? {};
     return ProductPriceRange(
-      minVariantPrice:
-          double.tryParse(min['amount']?.toString() ?? '0') ?? 0,
-      maxVariantPrice:
-          double.tryParse(max['amount']?.toString() ?? '0') ?? 0,
+      minVariantPrice: double.tryParse(min['amount']?.toString() ?? '0') ?? 0,
+      maxVariantPrice: double.tryParse(max['amount']?.toString() ?? '0') ?? 0,
       currencyCode: min['currencyCode'] as String? ?? 'USD',
     );
   }
@@ -247,10 +251,9 @@ final class SellingPlanGroup {
   });
 
   factory SellingPlanGroup.fromJson(Map<String, dynamic> json) {
-    final plansEdges =
-        (json['sellingPlans'] as Map<String, dynamic>?)?['edges']
+    final plansEdges = (json['sellingPlans'] as Map<String, dynamic>?)?['edges']
             as List<dynamic>? ??
-            [];
+        [];
     return SellingPlanGroup(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',

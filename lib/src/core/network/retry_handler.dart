@@ -35,7 +35,8 @@ final class RetryConfig {
     if (!jitter) return Duration(milliseconds: clamped.round());
     final spread = clamped * 0.25;
     final jittered = clamped + (Random().nextDouble() * 2 - 1) * spread;
-    return Duration(milliseconds: jittered.round().clamp(0, maxDelay.inMilliseconds));
+    return Duration(
+        milliseconds: jittered.round().clamp(0, maxDelay.inMilliseconds));
   }
 }
 

@@ -21,8 +21,9 @@ final class Collection {
   });
 
   factory Collection.fromJson(Map<String, dynamic> json) {
-    final productsEdges =
-        (json['products'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ?? [];
+    final productsEdges = (json['products'] as Map<String, dynamic>?)?['edges']
+            as List<dynamic>? ??
+        [];
 
     return Collection(
       id: json['id'] as String,

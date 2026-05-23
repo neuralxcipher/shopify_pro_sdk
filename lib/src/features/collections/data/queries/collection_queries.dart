@@ -28,7 +28,8 @@ abstract final class CollectionQueries {
         }
       }
     }
-  ''' + _imageFragment;
+  ''' +
+      _imageFragment;
 
   static const String getCollectionByHandle = r'''
     query GetCollectionByHandle(
@@ -75,7 +76,8 @@ abstract final class CollectionQueries {
         }
       }
     }
-  ''' + _imageFragment;
+  ''' +
+      _imageFragment;
 
   static const String getCollectionById = r'''
     query GetCollectionById($id: ID!, $country: CountryCode, $language: LanguageCode)
@@ -86,7 +88,8 @@ abstract final class CollectionQueries {
         seo { title description }
       }
     }
-  ''' + _imageFragment;
+  ''' +
+      _imageFragment;
 }
 
 enum CollectionProductSortKey {

@@ -22,7 +22,8 @@ class ProductDetailScreen extends ConsumerStatefulWidget {
   final String handle;
 
   @override
-  ConsumerState<ProductDetailScreen> createState() => _ProductDetailScreenState();
+  ConsumerState<ProductDetailScreen> createState() =>
+      _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
@@ -81,10 +82,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                     if (_selectedVariant != null)
                       Text(
                         '${_selectedVariant!.currencyCode} ${_selectedVariant!.price.toStringAsFixed(2)}',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                               fontWeight: FontWeight.bold,
                             ),
@@ -137,7 +135,8 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen> {
                 child: FilledButton.icon(
                   onPressed: _selectedVariant?.availableForSale == true
                       ? () async {
-                          final cartNotifier = ref.read(cartStateProvider.notifier);
+                          final cartNotifier =
+                              ref.read(cartStateProvider.notifier);
                           await cartNotifier.createCart();
                           await cartNotifier.addItem(_selectedVariant!.id);
                           if (context.mounted) {

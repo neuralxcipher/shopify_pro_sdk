@@ -15,10 +15,12 @@ final class SearchResult {
   });
 
   factory SearchResult.fromJson(Map<String, dynamic> json) {
-    final productEdges =
-        (json['products'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ?? [];
-    final collectionEdges =
-        (json['collections'] as Map<String, dynamic>?)?['edges'] as List<dynamic>? ?? [];
+    final productEdges = (json['products'] as Map<String, dynamic>?)?['edges']
+            as List<dynamic>? ??
+        [];
+    final collectionEdges = (json['collections']
+            as Map<String, dynamic>?)?['edges'] as List<dynamic>? ??
+        [];
 
     return SearchResult(
       products: productEdges
@@ -36,7 +38,8 @@ final class SearchResult {
           )
           .toList(),
       totalProductCount:
-          (json['products'] as Map<String, dynamic>?)?['totalCount'] as int? ?? 0,
+          (json['products'] as Map<String, dynamic>?)?['totalCount'] as int? ??
+              0,
     );
   }
 
@@ -56,15 +59,13 @@ final class PredictiveSearchResult {
   });
 
   factory PredictiveSearchResult.fromJson(Map<String, dynamic> json) {
-    final predictive =
-        json['predictiveSearch'] as Map<String, dynamic>? ?? {};
-    final productRaw =
-        (predictive['products'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
-    final collectionRaw =
-        (predictive['collections'] as List<dynamic>? ?? [])
-            .cast<Map<String, dynamic>>();
-    final queryRaw =
-        (predictive['queries'] as List<dynamic>? ?? []).cast<Map<String, dynamic>>();
+    final predictive = json['predictiveSearch'] as Map<String, dynamic>? ?? {};
+    final productRaw = (predictive['products'] as List<dynamic>? ?? [])
+        .cast<Map<String, dynamic>>();
+    final collectionRaw = (predictive['collections'] as List<dynamic>? ?? [])
+        .cast<Map<String, dynamic>>();
+    final queryRaw = (predictive['queries'] as List<dynamic>? ?? [])
+        .cast<Map<String, dynamic>>();
 
     return PredictiveSearchResult(
       products: productRaw.map(Product.fromJson).toList(),

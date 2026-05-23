@@ -44,13 +44,15 @@ final _router = GoRouter(
   initialLocation: '/',
   routes: [
     GoRoute(path: '/', builder: (_, __) => const HomeScreen()),
-    GoRoute(path: '/products', builder: (_, __) => const ProductListingScreen()),
+    GoRoute(
+        path: '/products', builder: (_, __) => const ProductListingScreen()),
     GoRoute(
       path: '/products/:handle',
       builder: (_, state) =>
           ProductDetailScreen(handle: state.pathParameters['handle']!),
     ),
-    GoRoute(path: '/collections', builder: (_, __) => const CollectionsScreen()),
+    GoRoute(
+        path: '/collections', builder: (_, __) => const CollectionsScreen()),
     GoRoute(path: '/search', builder: (_, __) => const SearchScreen()),
     GoRoute(path: '/cart', builder: (_, __) => const CartScreen()),
     GoRoute(path: '/login', builder: (_, __) => const LoginScreen()),

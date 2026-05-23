@@ -74,7 +74,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 32),
-
                 TextFormField(
                   controller: _emailCtrl,
                   decoration: const InputDecoration(
@@ -83,11 +82,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     border: OutlineInputBorder(),
                   ),
                   keyboardType: TextInputType.emailAddress,
-                  validator: (v) =>
-                      v != null && v.contains('@') ? null : 'Enter a valid email',
+                  validator: (v) => v != null && v.contains('@')
+                      ? null
+                      : 'Enter a valid email',
                 ),
                 const SizedBox(height: 16),
-
                 TextFormField(
                   controller: _passwordCtrl,
                   obscureText: _obscurePassword,
@@ -97,7 +96,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     border: const OutlineInputBorder(),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                        _obscurePassword
+                            ? Icons.visibility_off
+                            : Icons.visibility,
                       ),
                       onPressed: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
@@ -107,7 +108,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       v != null && v.length >= 6 ? null : 'Min 6 characters',
                 ),
                 const SizedBox(height: 8),
-
                 if (_error != null)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
@@ -118,7 +118,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                   ),
-
                 const SizedBox(height: 16),
                 FilledButton(
                   onPressed: _loading ? null : _login,

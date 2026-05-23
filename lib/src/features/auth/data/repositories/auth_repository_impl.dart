@@ -24,8 +24,7 @@ final class AuthRepositoryImpl implements AuthRepository {
     required this.engine,
     required this.config,
     FlutterSecureStorage? secureStorage,
-  }) : _storage = secureStorage ??
-            const FlutterSecureStorage();
+  }) : _storage = secureStorage ?? const FlutterSecureStorage();
 
   final GraphQLEngine engine;
   final ShopifyConfig config;
@@ -47,8 +46,7 @@ final class AuthRepositoryImpl implements AuthRepository {
     final result = data['customerAccessTokenCreate'] as Map<String, dynamic>;
     _throwIfUserErrors(result['customerUserErrors']);
 
-    final tokenJson =
-        result['customerAccessToken'] as Map<String, dynamic>?;
+    final tokenJson = result['customerAccessToken'] as Map<String, dynamic>?;
     if (tokenJson == null) {
       throw const ShopifyAuthException('Login failed: no token returned');
     }
@@ -122,8 +120,7 @@ final class AuthRepositoryImpl implements AuthRepository {
     final result = data['customerAccessTokenRenew'] as Map<String, dynamic>;
     _throwIfUserErrors(result['userErrors']);
 
-    final tokenJson =
-        result['customerAccessToken'] as Map<String, dynamic>?;
+    final tokenJson = result['customerAccessToken'] as Map<String, dynamic>?;
     if (tokenJson == null) {
       throw const ShopifyAuthException('Token renewal failed');
     }

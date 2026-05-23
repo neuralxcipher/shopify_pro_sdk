@@ -12,8 +12,7 @@ import '../shopify_providers.dart';
 import '../widgets/loading_widget.dart';
 import '../widgets/product_card.dart';
 
-final _productsPageProvider =
-    FutureProvider.autoDispose<ShopifyPage<Product>>(
+final _productsPageProvider = FutureProvider.autoDispose<ShopifyPage<Product>>(
   (ref) => ref.watch(productsProvider).fetchProducts(first: 24),
 );
 

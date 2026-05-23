@@ -20,10 +20,8 @@ final class CartLine {
 
   factory CartLine.fromJson(Map<String, dynamic> json) {
     final cost = json['cost'] as Map<String, dynamic>? ?? {};
-    final subtotalRaw =
-        cost['subtotalAmount'] as Map<String, dynamic>? ?? {};
-    final totalRaw =
-        cost['totalAmount'] as Map<String, dynamic>?;
+    final subtotalRaw = cost['subtotalAmount'] as Map<String, dynamic>? ?? {};
+    final totalRaw = cost['totalAmount'] as Map<String, dynamic>?;
 
     return CartLine(
       id: json['id'] as String,
@@ -42,14 +40,13 @@ final class CartLine {
             (a) => CartAttribute.fromJson(a as Map<String, dynamic>),
           )
           .toList(),
-      discountAllocations:
-          (json['discountAllocations'] as List<dynamic>? ?? [])
-              .map(
-                (d) => CartDiscountAllocation.fromJson(
-                  d as Map<String, dynamic>,
-                ),
-              )
-              .toList(),
+      discountAllocations: (json['discountAllocations'] as List<dynamic>? ?? [])
+          .map(
+            (d) => CartDiscountAllocation.fromJson(
+              d as Map<String, dynamic>,
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -117,8 +114,7 @@ final class CartDiscountAllocation {
   });
 
   factory CartDiscountAllocation.fromJson(Map<String, dynamic> json) {
-    final amountRaw =
-        json['discountedAmount'] as Map<String, dynamic>? ?? {};
+    final amountRaw = json['discountedAmount'] as Map<String, dynamic>? ?? {};
     return CartDiscountAllocation(
       discountedAmount:
           double.tryParse(amountRaw['amount']?.toString() ?? '0') ?? 0,

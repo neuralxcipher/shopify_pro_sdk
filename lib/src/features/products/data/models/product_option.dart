@@ -41,7 +41,9 @@ final class ProductOption {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ProductOption && runtimeType == other.runtimeType && id == other.id;
+      other is ProductOption &&
+          runtimeType == other.runtimeType &&
+          id == other.id;
 
   @override
   int get hashCode => id.hashCode;

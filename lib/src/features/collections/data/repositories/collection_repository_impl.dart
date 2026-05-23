@@ -49,7 +49,8 @@ final class CollectionRepositoryImpl implements CollectionRepository {
     String handle, {
     int productsFirst = 20,
     String? productsAfter,
-    CollectionProductSortKey sortKey = CollectionProductSortKey.collectionDefault,
+    CollectionProductSortKey sortKey =
+        CollectionProductSortKey.collectionDefault,
     bool reverse = false,
     String? country,
     String? language,
@@ -70,8 +71,7 @@ final class CollectionRepositoryImpl implements CollectionRepository {
           .build(),
       cacheTtl: CacheTtl.defaultProducts,
     );
-    final collectionJson =
-        data['collectionByHandle'] as Map<String, dynamic>?;
+    final collectionJson = data['collectionByHandle'] as Map<String, dynamic>?;
     if (collectionJson == null) {
       throw ShopifyNotFoundException('Collection not found: $handle');
     }

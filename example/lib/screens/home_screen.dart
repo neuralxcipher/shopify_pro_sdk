@@ -61,10 +61,8 @@ class HomeScreen extends ConsumerWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Enterprise Flutter SDK for Shopify',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(color: colorScheme.onPrimary.withValues(alpha: 0.9)),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onPrimary.withValues(alpha: 0.9)),
                   ),
                 ],
               ),
