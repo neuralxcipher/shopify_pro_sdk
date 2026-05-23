@@ -7,6 +7,15 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [1.0.1] — 2026-05-24
+
+### Fixed
+
+- Trimmed `pubspec.yaml` description to 140 characters (pub.dev limit: 60–180).
+- Removed premature `documentation:` URL that caused unreachable-URL penalty.
+
+---
+
 ## [1.0.0] — 2026-05-23
 
 ### Added
