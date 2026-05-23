@@ -1,0 +1,46 @@
+name: shopify_pro_sdk
+description: >
+  Enterprise-grade Flutter SDK for Shopify Storefront API. Supports products,
+  collections, cart, checkout, customer auth, search, metafields, multi-currency,
+  markets, selling plans, subscriptions, and advanced GraphQL engine with caching,
+  retry, and pagination. Null-safe, Dart 3 compatible, production-ready.
+version: 1.0.0
+homepage: https://neuralxcipher.com
+repository: https://github.com/neuralxcipher/shopify_pro_sdk
+issue_tracker: https://github.com/neuralxcipher/shopify_pro_sdk/issues
+documentation: https://pub.dev/documentation/shopify_pro_sdk/latest/
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.6.0
+  flutter_secure_storage: ^10.3.0
+  shared_preferences: ^2.5.5
+  uuid: ^4.3.3
+  logger: ^2.7.0
+  collection: ^1.19.1
+  connectivity_plus: ^7.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  mockito: ^5.7.0
+  build_runner: ^2.15.0
+
+topics:
+  - shopify
+  - ecommerce
+  - storefront
+  - graphql
+  - headless-commerce
+
+# screenshots:
+#   - description: "Shopify Pro SDK — Product Listing"
+#     path: screenshots/product_listing.png
+#   - description: "Shopify Pro SDK — Cart & Checkout"
+#     path: screenshots/cart_checkout.png
