@@ -16,8 +16,8 @@ Future<void> main() async {
   // Replace with your store credentials before running.
   final shopify = await ShopifyClient.init(
     config: ShopifyConfig(
-      storeDomain: '63ibjc-s9.myshopify.com',
-      storefrontAccessToken: '25a1a195add2c42459e8d4ac968ee566',
+      storeDomain: 'your-store.myshopify.com',
+      storefrontAccessToken: 'your_storefront_access_token',
       logLevel: ShopifyLogLevel.debug,
     ),
   );
