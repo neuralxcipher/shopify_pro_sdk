@@ -5,7 +5,7 @@
   "packages": [
     {
       "name": "shopify_pro_sdk",
-      "version": "1.0.2",
+      "version": "1.1.0",
       "dependencies": [
         "collection",
         "connectivity_plus",
